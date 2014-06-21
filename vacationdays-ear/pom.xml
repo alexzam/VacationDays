@@ -38,7 +38,7 @@
         <dependency>
             <groupId>alexzam.vacation</groupId>
             <artifactId>vacationdays-webapp</artifactId>
-            <version>${version}</version>
+            <version>${project.version}</version>
             <type>war</type>
         </dependency>
     </dependencies>
