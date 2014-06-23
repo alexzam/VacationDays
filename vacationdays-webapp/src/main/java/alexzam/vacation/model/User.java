@@ -1,33 +1,24 @@
 package alexzam.vacation.model;
 
+import alexzam.vacation.dto.FullInfo;
 import org.joda.time.LocalDate;
 
-import java.util.ArrayList;
+import java.io.Serializable;
 import java.util.List;
 
-public class User {
-    private LocalDate lastKnownDate;
-    private int lastKnownValue;
+/**
+ * Created by AlexZam on 24.06.2014.
+ */
+public interface User extends Serializable {
+    LocalDate getLastKnownDate();
 
-    private List<Vacation> vacations = new ArrayList<Vacation>();
+    void setLastKnownDate(LocalDate lastKnownDate);
 
-    public LocalDate getLastKnownDate() {
-        return lastKnownDate;
-    }
+    int getLastKnownValue();
 
-    public void setLastKnownDate(LocalDate lastKnownDate) {
-        this.lastKnownDate = lastKnownDate;
-    }
+    void setLastKnownValue(int lastKnownValue);
 
-    public int getLastKnownValue() {
-        return lastKnownValue;
-    }
+    List<Vacation> getVacations();
 
-    public void setLastKnownValue(int lastKnownValue) {
-        this.lastKnownValue = lastKnownValue;
-    }
-
-    public List<Vacation> getVacations() {
-        return vacations;
-    }
+    FullInfo generateDto();
 }

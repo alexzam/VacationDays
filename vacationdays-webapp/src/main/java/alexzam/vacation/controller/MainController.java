@@ -1,9 +1,9 @@
 package alexzam.vacation.controller;
 
 import alexzam.vacation.dto.DateState;
+import alexzam.vacation.dto.FullInfo;
 import alexzam.vacation.model.User;
 import alexzam.vacation.service.VacDaysService;
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,6 +17,9 @@ public class MainController {
     @Autowired
     VacDaysService daysService;
 
+    @Autowired
+    User user;
+
     @RequestMapping("/")
     public String main() {
         return "main";
@@ -25,10 +28,10 @@ public class MainController {
     @RequestMapping(value = "/json/setInitial", method = RequestMethod.POST, consumes = "application/json",
             produces = "application/json")
     @ResponseBody
-    public User setInitial(@RequestBody DateState state) {
-        User user = daysService.setInitialDate(null, state);
+    public FullInfo setInitial(@RequestBody DateState state) {
+        daysService.setInitialDate(state);
 
-        return user;
+        return user.generateDto();
     }
 
 
