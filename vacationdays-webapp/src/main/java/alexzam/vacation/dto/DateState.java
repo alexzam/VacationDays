@@ -9,7 +9,7 @@ public class DateState {
     private LocalDate date;
 
     @JsonProperty("n")
-    private String number;
+    private Integer number;
 
     public LocalDate getDate() {
         return date;
@@ -19,11 +19,11 @@ public class DateState {
         this.date = date;
     }
 
-    public String getNumber() {
+    public Integer getNumber() {
         return number;
     }
 
-    public void setNumber(String number) {
+    public void setNumber(Integer number) {
         this.number = number;
     }
 }
