@@ -14,6 +14,7 @@ import java.util.List;
 public class UserImpl implements User {
     private LocalDate lastKnownDate;
     private int lastKnownValue;
+    private int currentNum;
 
     private List<Vacation> vacations = new ArrayList<Vacation>();
 
@@ -23,8 +24,13 @@ public class UserImpl implements User {
         info.setLastKnownDate(lastKnownDate);
         info.setLastKnownValue(lastKnownValue);
         info.setVacations(new ArrayList<Vacation>(vacations));
+        info.setCurrentNum(currentNum);
 
         return info;
+    }
+
+    public void setCurrentNum(int currentNum) {
+        this.currentNum = currentNum;
     }
 
     public LocalDate getLastKnownDate() {

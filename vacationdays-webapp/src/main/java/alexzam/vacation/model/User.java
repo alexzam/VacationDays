@@ -21,4 +21,6 @@ public interface User extends Serializable {
     List<Vacation> getVacations();
 
     FullInfo generateDto();
+
+    void setCurrentNum(int i);
 }

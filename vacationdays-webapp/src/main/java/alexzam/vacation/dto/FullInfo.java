@@ -5,9 +5,11 @@ import org.joda.time.LocalDate;
 
 import java.util.List;
 
+@SuppressWarnings("UnusedDeclaration")
 public class FullInfo {
     private LocalDate lastKnownDate;
     private int lastKnownValue;
+    private int currentNum;
 
     private List<Vacation> vacations;
 
@@ -33,5 +35,13 @@ public class FullInfo {
 
     public void setVacations(List<Vacation> vacations) {
         this.vacations = vacations;
+    }
+
+    public int getCurrentNum() {
+        return currentNum;
+    }
+
+    public void setCurrentNum(int currentNum) {
+        this.currentNum = currentNum;
     }
 }

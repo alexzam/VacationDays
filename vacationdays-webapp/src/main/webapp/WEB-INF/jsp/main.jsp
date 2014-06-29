@@ -68,6 +68,10 @@
         </form>
     </section>
 
+    <section id="status" style="display: none">
+        <p class="lead">К настоящему моменту накоплено <span id="spCurrentNum"></span></p>
+    </section>
+
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
