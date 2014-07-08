@@ -68,6 +68,22 @@
         </form>
     </section>
 
+    <section id="vacations" style="display: none">
+        <div class="panel panel-info">
+            <p class="panel-heading">Отпуска</p>
+
+            <div class="panel-body">
+                AAA
+                <p>
+                    BBB
+                </p>
+            </div>
+
+            <ul class="list-group">
+            </ul>
+        </div>
+    </section>
+
     <section id="status" style="display: none">
         <p class="lead">К настоящему моменту накоплено <span id="spCurrentNum"></span></p>
     </section>

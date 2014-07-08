@@ -3,6 +3,7 @@ package alexzam.vacation.service;
 import alexzam.vacation.dto.DateState;
 import alexzam.vacation.model.User;
 import alexzam.vacation.model.UserImpl;
+import alexzam.vacation.model.Vacation;
 import org.joda.time.Days;
 import org.joda.time.LocalDate;
 import org.joda.time.Months;
@@ -29,7 +30,7 @@ public class VacDaysService {
         user.setCurrentNum(calculateNumber(user, new LocalDate()));
     }
 
-    private int calculateNumber(User user, LocalDate date) {
+    public int calculateNumber(User user, LocalDate date) {
         LocalDate start = user.getLastKnownDate();
         LocalDate toMonth = date.withDayOfMonth(start.getDayOfMonth());
         if (toMonth.isAfter(date)) toMonth = toMonth.minusMonths(1);
@@ -38,6 +39,12 @@ public class VacDaysService {
         int days = Days.daysBetween(toMonth, date).getDays();
         double monthVal = 28.0 / 12;
 
-        return (int) Math.round(monthVal * months + monthVal * days / 30);
+        int ret = (int) Math.round(monthVal * months + monthVal * days / 30);
+
+        for (Vacation vacation : user.getVacations()) {
+            ret -= vacation.getDuration();
+        }
+
+        return ret;
     }
 }

@@ -1,10 +1,15 @@
 package alexzam.vacation.model;
 
+import com.google.appengine.repackaged.org.joda.time.Days;
 import com.google.appengine.repackaged.org.joda.time.LocalDate;
 
 public class Vacation {
     private LocalDate start, end;
     private String comment;
+
+    public int getDuration() {
+        return Days.daysBetween(start, end).getDays();
+    }
 
     public LocalDate getStart() {
         return start;

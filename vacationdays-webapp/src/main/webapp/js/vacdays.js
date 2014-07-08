@@ -12,14 +12,29 @@ var VDays = {
             dataType: 'json',
             contentType: 'application/json',
             success: function (data) {
-                $('#initial').slideUp();
+                data['vacations'].push(13);
+                me._processUserData(data);
 
-                $('#spCurrentNum').text(me._numToDaysStr(data['currentNum']));
-                $('#status').slideDown();
+                $('#initial').slideUp();
+                $('#status').add('#vacations').slideDown();
             }
         });
 
         return false;
+    },
+
+    _processUserData: function (data) {
+        $('#spCurrentNum').text(this._numToDaysStr(data['currentNum']));
+
+        var ulEl = $('#vacations').find('ul');
+        ulEl.find('li').remove();
+
+        $.each(data['vacations'], function (i, v) {
+            var text = 'AAA bbb CCC';
+
+            $('<li class="list-group-item">' + text + '</li>')
+                .appendTo(ulEl);
+        });
     },
 
     _numToDaysStr: function (d) {
