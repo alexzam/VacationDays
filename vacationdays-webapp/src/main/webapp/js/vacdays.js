@@ -12,7 +12,6 @@ var VDays = {
             dataType: 'json',
             contentType: 'application/json',
             success: function (data) {
-                data['vacations'].push(13);
                 me._processUserData(data);
 
                 $('#initial').slideUp();
@@ -24,13 +23,16 @@ var VDays = {
     },
 
     _processUserData: function (data) {
-        $('#spCurrentNum').text(this._numToDaysStr(data['currentNum']));
+        var me = this;
+
+        $('#spCurrentNum').text(me._numToDaysStr(data['currentNum']));
 
         var ulEl = $('#vacations').find('ul');
         ulEl.find('li').remove();
 
         $.each(data['vacations'], function (i, v) {
-            var text = 'AAA bbb CCC';
+            console.dir(v);
+            var text = me._arrToDate(v.start);
 
             $('<li class="list-group-item">' + text + '</li>')
                 .appendTo(ulEl);
@@ -44,5 +46,9 @@ var VDays = {
         if (/1$/.test(sd)) return d + ' день';
         if (/[2-4]$/.test(sd)) return d + ' дня';
         return d + ' дней';
+    },
+
+    _arrToDate: function (arr) {
+        return new Date(arr[0], arr[1], arr[2]);
     }
 };

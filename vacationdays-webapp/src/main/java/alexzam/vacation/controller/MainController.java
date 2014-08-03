@@ -3,7 +3,9 @@ package alexzam.vacation.controller;
 import alexzam.vacation.dto.DateState;
 import alexzam.vacation.dto.FullInfo;
 import alexzam.vacation.model.User;
+import alexzam.vacation.model.Vacation;
 import alexzam.vacation.service.VacDaysService;
+import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,7 +33,10 @@ public class MainController {
     public FullInfo setInitial(@RequestBody DateState state) {
         daysService.setInitialDate(state);
 
-        return user.generateDto();
+        FullInfo info = user.generateDto();
+        info.getVacations().add(new Vacation(LocalDate.now().minusMonths(5), LocalDate.now(), "Commentos"));
+
+        return info;
     }
 
 
