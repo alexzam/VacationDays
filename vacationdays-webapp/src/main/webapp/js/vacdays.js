@@ -22,6 +22,39 @@ var VDays = {
         return false;
     },
 
+    addVacation: function () {
+        $('#secAddVacButton').hide();
+        $('#secAddVacForm').show();
+    },
+
+    submitVacation: function (form) {
+        $('#secAddVacButton').hide();
+        $('#secAddVacForm').show();
+
+        var me = this;
+        form = $(form);
+
+        var data = {
+            from: form.find('.inpFrom').val(),
+            to: form.find('.inpTo').val(),
+            comment: form.find('.inpComment').val(),
+            id: form.data('id')
+        };
+
+        $.ajax({
+            url: "/json/setVacation",
+            data: JSON.stringify(data),
+            type: 'POST',
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                me._processUserData(data);
+            }
+        });
+
+        return false;
+    },
+
     _processUserData: function (data) {
         var me = this;
 
@@ -32,9 +65,13 @@ var VDays = {
 
         $.each(data['vacations'], function (i, v) {
             console.dir(v);
-            var text = me._arrToDate(v.start);
+            var start = me._arrToDate(v.start);
+            var end = me._arrToDate(v.end);
+            var text = start.toLocaleDateString() + ' - ' + end.toLocaleDateString() + ": " + v.comment + " (" +
+                me._numToDaysStr(v.duration) + ")";
 
             $('<li class="list-group-item">' + text + '</li>')
+                .data('id', v.id)
                 .appendTo(ulEl);
         });
     },

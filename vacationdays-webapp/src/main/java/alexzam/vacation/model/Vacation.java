@@ -4,11 +4,12 @@ import org.joda.time.Days;
 import org.joda.time.LocalDate;
 
 public class Vacation {
+    private int id;
     private LocalDate start;
     private LocalDate end;
     private String comment;
 
-    public Vacation(LocalDate start, LocalDate end, String comment) {
+    public Vacation(int id, LocalDate start, LocalDate end, String comment) {
         this.start = start;
         this.end = end;
         this.comment = comment;
@@ -40,5 +41,13 @@ public class Vacation {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

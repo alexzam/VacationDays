@@ -73,10 +73,27 @@
             <p class="panel-heading">Отпуска</p>
 
             <div class="panel-body">
-                AAA
-                <p>
-                    BBB
+                <p id="secAddVacButton">
+                    <button class="btn" onclick="VDays.addVacation()">Добавить отпуск</button>
                 </p>
+
+                <div id="secAddVacForm" style="display: none">
+                    <form id="vacFormAdd" class="form-inline" data-id="0" onsubmit="return VDays.submitVacation(this)">
+                        <div class="form-group">
+                            <label for="initialDate">С:</label>
+                            <input type="date" class="form-control inpFrom"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="initialDate">По:</label>
+                            <input type="date" id="innpVacEnd" class="form-control inpTo"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="initialDate">Где были:</label>
+                            <input type="text" id="inpVacComment" class="form-control inpComment"/>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Добавить</button>
+                    </form>
+                </div>
             </div>
 
             <ul class="list-group">

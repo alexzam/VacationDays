@@ -34,7 +34,7 @@ public class MainController {
         daysService.setInitialDate(state);
 
         FullInfo info = user.generateDto();
-        info.getVacations().add(new Vacation(LocalDate.now().minusMonths(5), LocalDate.now(), "Commentos"));
+        info.getVacations().add(new Vacation(1, LocalDate.now().minusMonths(5), LocalDate.now(), "Commentos"));
 
         return info;
     }
