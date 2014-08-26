@@ -1,4 +1,6 @@
 var VDays = {
+    haveData: false,
+
     submitInitial: function () {
         var me = this;
         var data = {
@@ -89,3 +91,20 @@ var VDays = {
         return new Date(arr[0], arr[1], arr[2]);
     }
 };
+
+$(function () {
+    if (VDays.haveData) {
+        $.ajax({
+            url: "/json/getData",
+            type: 'GET',
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                VDays._processUserData(data);
+
+                $('#initial').hide();
+                $('#status').add('#vacations').show();
+            }
+        });
+    }
+});

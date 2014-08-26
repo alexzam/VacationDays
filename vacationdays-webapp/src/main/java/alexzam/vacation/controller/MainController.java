@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class MainController {
@@ -23,8 +24,10 @@ public class MainController {
     User user;
 
     @RequestMapping("/")
-    public String main() {
-        return "main";
+    public ModelAndView main() {
+        ModelAndView modelAndView = new ModelAndView("main");
+        modelAndView.addObject("haveData", user.getLastKnownDate() != null);
+        return modelAndView;
     }
 
     @RequestMapping(value = "/json/setInitial", method = RequestMethod.POST, consumes = "application/json",
@@ -39,5 +42,11 @@ public class MainController {
         return info;
     }
 
+    @RequestMapping(value = "/json/getData", method = RequestMethod.GET, consumes = "application/json",
+            produces = "application/json")
+    @ResponseBody
+    public FullInfo getData() {
+        return user.generateDto();
+    }
 
 }

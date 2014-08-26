@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html>
@@ -51,6 +52,15 @@
         <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a
             mostly barebones HTML document.</p>
     </div>
+
+    <section id="debug">
+        <c:if test="${haveData}">
+            Have data!
+        </c:if>
+        <c:if test="${not haveData}">
+            No data
+        </c:if>
+    </section>
 
     <section id="initial">
         <div>Введи дату, на которую точно известно количество дней отпуска и это количество.</div>
@@ -109,5 +119,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 <script src="js/vacdays.js"></script>
+<script>
+    VDays.haveData = ${haveData};
+</script>
 </body>
 </html>
