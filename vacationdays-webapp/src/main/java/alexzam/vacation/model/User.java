@@ -23,4 +23,6 @@ public interface User extends Serializable {
     FullInfo generateDto();
 
     void setCurrentNum(int i);
+
+    void setVacation(Vacation vacation);
 }

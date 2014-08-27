@@ -3,13 +3,19 @@ package alexzam.vacation.model;
 import org.joda.time.Days;
 import org.joda.time.LocalDate;
 
-public class Vacation {
+import java.io.Serializable;
+
+public class Vacation implements Serializable {
     private int id;
     private LocalDate start;
     private LocalDate end;
     private String comment;
 
+    public Vacation() {
+    }
+
     public Vacation(int id, LocalDate start, LocalDate end, String comment) {
+        this.id = id;
         this.start = start;
         this.end = end;
         this.comment = comment;

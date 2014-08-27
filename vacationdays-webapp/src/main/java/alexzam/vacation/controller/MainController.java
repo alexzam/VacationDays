@@ -49,4 +49,12 @@ public class MainController {
         return user.generateDto();
     }
 
+    @RequestMapping(value = "/json/setVacation", method = RequestMethod.POST, consumes = "application/json",
+            produces = "application/json")
+    @ResponseBody
+    public FullInfo setVacation(@RequestBody Vacation vacation) {
+        user.setVacation(vacation);
+
+        return user.generateDto();
+    }
 }

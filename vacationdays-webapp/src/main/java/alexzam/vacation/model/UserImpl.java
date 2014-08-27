@@ -16,14 +16,14 @@ public class UserImpl implements User {
     private int lastKnownValue;
     private int currentNum;
 
-    private List<Vacation> vacations = new ArrayList<Vacation>();
+    private List<Vacation> vacations = new ArrayList<>();
 
     public FullInfo generateDto() {
         FullInfo info = new FullInfo();
 
         info.setLastKnownDate(lastKnownDate);
         info.setLastKnownValue(lastKnownValue);
-        info.setVacations(new ArrayList<Vacation>(vacations));
+        info.setVacations(new ArrayList<>(vacations));
         info.setCurrentNum(currentNum);
 
         return info;
@@ -31,6 +31,27 @@ public class UserImpl implements User {
 
     public void setCurrentNum(int currentNum) {
         this.currentNum = currentNum;
+    }
+
+    public void setVacation(Vacation vacation) {
+        int id = vacation.getId();
+        boolean updated = false;
+
+        for (Vacation vac : vacations) {
+            if (vac.getId() == id) {
+                updated = true;
+                vac.setComment(vacation.getComment());
+                vac.setStart(vacation.getStart());
+                vac.setEnd(vacation.getEnd());
+
+                break;
+            }
+        }
+
+        if (!updated) {
+            // Add new vacation
+            vacations.add(vacation);
+        }
     }
 
     public LocalDate getLastKnownDate() {

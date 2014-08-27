@@ -37,8 +37,8 @@ var VDays = {
         form = $(form);
 
         var data = {
-            from: form.find('.inpFrom').val(),
-            to: form.find('.inpTo').val(),
+            start: form.find('.inpFrom').val(),
+            end: form.find('.inpTo').val(),
             comment: form.find('.inpComment').val(),
             id: form.data('id')
         };
