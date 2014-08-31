@@ -10,6 +10,8 @@ import org.joda.time.Months;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class VacDaysService {
     @Autowired
@@ -45,6 +47,42 @@ public class VacDaysService {
             ret -= vacation.getDuration();
         }
 
+        if (ret < 0) ret = 0;
+
         return ret;
+    }
+
+    public void setVacation(User user, Vacation vacation) {
+        int id = vacation.getId();
+        boolean newVac = vacation.getId() == 0;
+
+        List<Vacation> vacations = user.getVacations();
+
+        int maxId = 0;
+        for (Vacation vac : vacations) {
+            int curId = vac.getId();
+
+            if (newVac) {
+                // Find out max ID
+                if (curId > maxId) maxId = curId;
+            } else {
+                // Find vacation to update
+                if (curId == id) {
+                    vac.setComment(vacation.getComment());
+                    vac.setStart(vacation.getStart());
+                    vac.setEnd(vacation.getEnd());
+
+                    break;
+                }
+            }
+        }
+
+        if (newVac) {
+            // Add new vacation
+            vacation.setId(maxId + 1);
+            vacations.add(vacation);
+        }
+
+        updateUserCurrentNum(user);
     }
 }

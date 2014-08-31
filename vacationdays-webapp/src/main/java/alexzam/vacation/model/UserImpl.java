@@ -33,27 +33,6 @@ public class UserImpl implements User {
         this.currentNum = currentNum;
     }
 
-    public void setVacation(Vacation vacation) {
-        int id = vacation.getId();
-        boolean updated = false;
-
-        for (Vacation vac : vacations) {
-            if (vac.getId() == id) {
-                updated = true;
-                vac.setComment(vacation.getComment());
-                vac.setStart(vacation.getStart());
-                vac.setEnd(vacation.getEnd());
-
-                break;
-            }
-        }
-
-        if (!updated) {
-            // Add new vacation
-            vacations.add(vacation);
-        }
-    }
-
     public LocalDate getLastKnownDate() {
         return lastKnownDate;
     }

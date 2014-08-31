@@ -53,7 +53,7 @@ public class MainController {
             produces = "application/json")
     @ResponseBody
     public FullInfo setVacation(@RequestBody Vacation vacation) {
-        user.setVacation(vacation);
+        daysService.setVacation(user, vacation);
 
         return user.generateDto();
     }
