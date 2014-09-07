@@ -30,8 +30,8 @@ var VDays = {
     },
 
     submitVacation: function (form) {
-        $('#secAddVacButton').hide();
-        $('#secAddVacForm').show();
+        $('#secAddVacButton').show();
+        $('#secAddVacForm').hide();
 
         var me = this;
         form = $(form);
@@ -57,13 +57,20 @@ var VDays = {
         return false;
     },
 
+    startEditVac: function (vacEl) {
+        var id = vacEl.data('id');
+
+        $('#vacEditFormTemplate').find('a').clone().insertAfter(vacEl).show();
+        vacEl.hide();
+    },
+
     _processUserData: function (data) {
         var me = this;
 
         $('#spCurrentNum').text(me._numToDaysStr(data['currentNum']));
 
-        var ulEl = $('#vacations').find('ul');
-        ulEl.find('li').remove();
+        var vacList = $('#vacations').find('.list-group');
+        vacList.children().remove();
 
         $.each(data['vacations'], function (i, v) {
             console.dir(v);
@@ -72,9 +79,9 @@ var VDays = {
             var text = start.toLocaleDateString() + ' - ' + end.toLocaleDateString() + ": " + v.comment + " (" +
                 me._numToDaysStr(v.duration) + ")";
 
-            $('<li class="list-group-item">' + text + '</li>')
+            $('<a class="list-group-item" href="#">' + text + '</a>')
                 .data('id', v.id)
-                .appendTo(ulEl);
+                .appendTo(vacList);
         });
     },
 
@@ -107,4 +114,11 @@ $(function () {
             }
         });
     }
+
+    $('#vacations')
+        .find('.list-group')
+        .on("click", 'a', function (e) {
+            VDays.startEditVac($(this));
+            return false;
+        });
 });

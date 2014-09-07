@@ -90,15 +90,15 @@
                 <div id="secAddVacForm" style="display: none">
                     <form id="vacFormAdd" class="form-inline" data-id="0" onsubmit="return VDays.submitVacation(this)">
                         <div class="form-group">
-                            <label for="initialDate">С:</label>
-                            <input type="date" class="form-control inpFrom"/>
+                            <label for="innpVacStart">С:</label>
+                            <input type="date" id="innpVacStart" class="form-control inpFrom"/>
                         </div>
                         <div class="form-group">
-                            <label for="initialDate">По:</label>
+                            <label for="innpVacEnd">По:</label>
                             <input type="date" id="innpVacEnd" class="form-control inpTo"/>
                         </div>
                         <div class="form-group">
-                            <label for="initialDate">Где были:</label>
+                            <label for="inpVacComment">Где были:</label>
                             <input type="text" id="inpVacComment" class="form-control inpComment"/>
                         </div>
                         <button type="submit" class="btn btn-primary">Добавить</button>
@@ -106,14 +106,38 @@
                 </div>
             </div>
 
-            <ul class="list-group">
-            </ul>
+            <div class="list-group">
+            </div>
         </div>
     </section>
 
     <section id="status" style="display: none">
         <p class="lead">К настоящему моменту накоплено <span id="spCurrentNum"></span></p>
     </section>
+
+    <div id="vacEditFormTemplate" style="display: none">
+        <a class="list-group-item" href="#">
+            <form class="form-inline" onsubmit="return VDays.submitVacation(this)">
+                <div class="form-group">
+                    <label for="initialDate">С:</label>
+                    <input type="date" class="form-control inpFrom"/>
+                </div>
+                <div class="form-group">
+                    <label for="innpEdVacEnd">По:</label>
+                    <input type="date" id="innpEdVacEnd" class="form-control inpTo"/>
+                </div>
+                <div class="form-group">
+                    <label for="inpEdVacComment">Где были:</label>
+                    <input type="text" id="inpEdVacComment" class="form-control inpComment"/>
+                </div>
+                <button type="submit" class="btn btn-primary">Изменить</button>
+                <button type="button" class="btn btn-danger">Удалить</button>
+                <button type="button" class="btn btn-default flRight">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </button>
+            </form>
+        </a>
+    </div>
 
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
