@@ -132,9 +132,7 @@
                 </div>
                 <button type="submit" class="btn btn-primary">Изменить</button>
                 <button type="button" class="btn btn-danger">Удалить</button>
-                <button type="button" class="btn btn-default flRight">
-                    <span class="glyphicon glyphicon-remove"></span>
-                </button>
+                <button type="button" class="btn btn-default flRight">Отмена</button>
             </form>
         </a>
     </div>
