@@ -11,6 +11,8 @@
     <meta name="description" content="">
     <meta name="author" content="Alex Zamyshlyaev">
 
+    <link rel="stylesheet" href="css/jquery-ui.min.css">
+    <link rel="stylesheet" href="css/jquery-ui.theme.min.css">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
     <%--<link rel="stylesheet" href="css/flatly.min.css">--%>
@@ -68,11 +70,11 @@
         <form class="form-inline" onsubmit="return VDays.submitInitial()">
             <div class="form-group">
                 <label for="initialDate">Дата:</label>
-                <input type="date" id="initialDate" class="form-control"/>
+                <input type="text" id="initialDate" class="form-control datepicker"/>
             </div>
             <div class="form-group">
                 <label for="initialNum">Количество:</label>
-                <input type="number" id="initialNum" class="form-control" min="0"/>
+                <input type="number" id="initialNum" class="form-control" min="0" value="0"/>
             </div>
             <button type="submit" class="btn btn-primary">Запомнить</button>
         </form>
@@ -91,11 +93,11 @@
                     <form id="vacFormAdd" class="form-inline" data-id="0" onsubmit="return VDays.submitVacation(this)">
                         <div class="form-group">
                             <label for="innpVacStart">С:</label>
-                            <input type="date" id="innpVacStart" class="form-control inpFrom"/>
+                            <input type="text" id="innpVacStart" class="form-control inpFrom datepicker"/>
                         </div>
                         <div class="form-group">
                             <label for="innpVacEnd">По:</label>
-                            <input type="date" id="innpVacEnd" class="form-control inpTo"/>
+                            <input type="text" id="innpVacEnd" class="form-control inpTo datepicker"/>
                         </div>
                         <div class="form-group">
                             <label for="inpVacComment">Где были:</label>
@@ -116,15 +118,15 @@
     </section>
 
     <div id="vacEditFormTemplate" style="display: none">
-        <a class="list-group-item" href="#">
+        <a class="list-group-item disabled">
             <form class="form-inline" onsubmit="return VDays.submitVacation(this)">
                 <div class="form-group">
-                    <label for="initialDate">С:</label>
-                    <input type="date" class="form-control inpFrom"/>
+                    <label for="inpEdVacStart">С:</label>
+                    <input type="text" id="inpEdVacStart" class="form-control inpFrom datepicker"/>
                 </div>
                 <div class="form-group">
-                    <label for="innpEdVacEnd">По:</label>
-                    <input type="date" id="innpEdVacEnd" class="form-control inpTo"/>
+                    <label for="inpEdVacEnd">По:</label>
+                    <input type="text" id="inpEdVacEnd" class="form-control inpTo datepicker"/>
                 </div>
                 <div class="form-group">
                     <label for="inpEdVacComment">Где были:</label>
@@ -139,6 +141,7 @@
 
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="js/jquery-ui.min.js"></script>
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 <script src="js/vacdays.js"></script>
 <script>
