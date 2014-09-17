@@ -4,7 +4,7 @@ var VDays = {
     submitInitial: function () {
         var me = this;
         var data = {
-            dt: $('#initialDate').val(),
+            dt: me._dateToArr($('#initialDate').datepicker('getDate')),
             n: $('#initialNum').val()
         };
         $.ajax({
@@ -37,8 +37,8 @@ var VDays = {
         form = $(form);
 
         var data = {
-            start: form.find('.inpFrom').val(),
-            end: form.find('.inpTo').val(),
+            start: me._dateToArr(form.find('.inpFrom').datepicker('getDate')),
+            end: me._dateToArr(form.find('.inpTo').datepicker('getDate')),
             comment: form.find('.inpComment').val(),
             id: form.data('id')
         };
@@ -103,6 +103,14 @@ var VDays = {
 
     _arrToDate: function (arr) {
         return new Date(arr[0], arr[1], arr[2]);
+    },
+
+    _dateToArr: function (date) {
+        return [
+            date.getFullYear(),
+            date.getMonth(),
+            date.getDate()
+        ];
     }
 };
 
