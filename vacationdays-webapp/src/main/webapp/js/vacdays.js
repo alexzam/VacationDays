@@ -68,7 +68,35 @@ var VDays = {
         form.find('.datepicker').datepicker();
 
         form.insertAfter(vacEl).show();
+        form.find('.datepicker').datepicker();
+        form.find('form').data('id', vac.id);
+
         vacEl.hide();
+    },
+
+    onCancelEdit: function () {
+        VDays._closeEdit($(this).closest('.list-group-item'));
+    },
+
+    onDeleteVacation: function () {
+        var formItem = $(this).closest('form');
+
+        $.ajax({
+            url: "/json/deleteVacation",
+            data: {
+                id: formItem.data('id')
+            },
+            type: 'POST',
+            dataType: 'json',
+            success: function (data) {
+                VDays._processUserData(data);
+            }
+        });
+    },
+
+    _closeEdit: function (el) {
+        el.prev().show();
+        el.remove();
     },
 
     _processUserData: function (data) {
@@ -130,12 +158,20 @@ $(function () {
         });
     }
 
-    $('#vacations')
+    var $vacations = $('#vacations');
+
+    $vacations
         .find('.list-group')
-        .on("click", '.vacation-item', function (e) {
+        .on("click", '.vacation-item', function () {
             VDays.startEditVac($(this));
             return false;
         });
 
-    $('.datepicker').datepicker();
+    $vacations.on('click', '.formEditVac .btnCancel', VDays.onCancelEdit);
+    $vacations.on('click', '.formEditVac .btnDelete', VDays.onDeleteVacation);
+
+    $.datepicker.setDefaults($.datepicker.regional[ "ru" ]);
+
+    $('section .datepicker')
+        .datepicker();
 });

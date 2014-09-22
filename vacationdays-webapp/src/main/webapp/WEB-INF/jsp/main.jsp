@@ -119,7 +119,7 @@
 
     <div id="vacEditFormTemplate" style="display: none">
         <a class="list-group-item disabled">
-            <form class="form-inline" onsubmit="return VDays.submitVacation(this)">
+            <form class="form-inline formEditVac" onsubmit="return VDays.submitVacation(this)">
                 <div class="form-group">
                     <label for="inpEdVacStart">С:</label>
                     <input type="text" id="inpEdVacStart" class="form-control inpFrom datepicker"/>
@@ -133,8 +133,8 @@
                     <input type="text" id="inpEdVacComment" class="form-control inpComment"/>
                 </div>
                 <button type="submit" class="btn btn-primary">Изменить</button>
-                <button type="button" class="btn btn-danger">Удалить</button>
-                <button type="button" class="btn btn-default flRight">Отмена</button>
+                <button type="button" class="btn btn-danger btnDelete">Удалить</button>
+                <button type="button" class="btn btn-default flRight btnCancel">Отмена</button>
             </form>
         </a>
     </div>
@@ -142,6 +142,7 @@
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script src="js/jquery-ui.min.js"></script>
+<script src="js/datepicker-ru.js"></script>
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 <script src="js/vacdays.js"></script>
 <script>

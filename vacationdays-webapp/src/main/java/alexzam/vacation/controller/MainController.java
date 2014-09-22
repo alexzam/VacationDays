@@ -5,13 +5,9 @@ import alexzam.vacation.dto.FullInfo;
 import alexzam.vacation.model.User;
 import alexzam.vacation.model.Vacation;
 import alexzam.vacation.service.VacDaysService;
-import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -36,10 +32,7 @@ public class MainController {
     public FullInfo setInitial(@RequestBody DateState state) {
         daysService.setInitialDate(state);
 
-        FullInfo info = user.generateDto();
-        info.getVacations().add(new Vacation(1, LocalDate.now().minusMonths(5), LocalDate.now(), "Commentos"));
-
-        return info;
+        return user.generateDto();
     }
 
     @RequestMapping(value = "/json/getData", method = RequestMethod.GET, consumes = "application/json",
@@ -54,6 +47,14 @@ public class MainController {
     @ResponseBody
     public FullInfo setVacation(@RequestBody Vacation vacation) {
         daysService.setVacation(user, vacation);
+
+        return user.generateDto();
+    }
+
+    @RequestMapping(value = "/json/deleteVacation", method = RequestMethod.POST, produces = "application/json")
+    @ResponseBody
+    public FullInfo deleteVacation(@RequestParam("id") int id) {
+        daysService.deleteVacation(user, id);
 
         return user.generateDto();
     }

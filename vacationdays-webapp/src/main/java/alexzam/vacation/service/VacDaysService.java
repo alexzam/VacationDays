@@ -10,6 +10,7 @@ import org.joda.time.Months;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Iterator;
 import java.util.List;
 
 @Service
@@ -81,6 +82,22 @@ public class VacDaysService {
             // Add new vacation
             vacation.setId(maxId + 1);
             vacations.add(vacation);
+        }
+
+        updateUserCurrentNum(user);
+    }
+
+    public void deleteVacation(User user, int id) {
+        Iterator<Vacation> iterator = user.getVacations().iterator();
+
+        while (iterator.hasNext()) {
+            Vacation vac = iterator.next();
+            int curId = vac.getId();
+
+            if (curId == id) {
+                iterator.remove();
+                break;
+            }
         }
 
         updateUserCurrentNum(user);
