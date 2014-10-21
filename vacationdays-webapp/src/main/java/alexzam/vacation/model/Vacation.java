@@ -22,7 +22,7 @@ public class Vacation implements Serializable {
     }
 
     public int getDuration() {
-        return Days.daysBetween(start, end).getDays();
+        return Days.daysBetween(start, end).getDays() + 1;
     }
 
     public LocalDate getStart() {

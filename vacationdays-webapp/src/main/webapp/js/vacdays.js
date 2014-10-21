@@ -110,10 +110,10 @@ var VDays = {
         $.each(data['vacations'], function (i, v) {
             var start = me._arrToDate(v.start);
             var end = me._arrToDate(v.end);
-            var text = start.toLocaleDateString() + ' - ' + end.toLocaleDateString() + ": " + v.comment + " (" +
-                me._numToDaysStr(v.duration) + ")";
+            var btext = me._numToDaysStr(v.duration) + ": ";
+            var text = start.toLocaleDateString() + ' - ' + end.toLocaleDateString() + ": " + v.comment;
 
-            $('<a class="list-group-item vacation-item" href="#">' + text + '</a>')
+            $('<a class="list-group-item vacation-item" href="#"><strong>' + btext + '</strong>' + text + '</a>')
                 .data('id', v.id)
                 .data('vac', v)
                 .appendTo(vacList);
@@ -153,7 +153,8 @@ $(function () {
                 VDays._processUserData(data);
 
                 $('#initial').hide();
-                $('#status').add('#vacations').show();
+                $('#status, #vacations, #editInitial')
+                    .show();
             }
         });
     }

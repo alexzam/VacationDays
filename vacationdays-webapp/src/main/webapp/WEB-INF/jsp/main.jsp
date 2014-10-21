@@ -3,7 +3,7 @@
 <!doctype html>
 <html>
 <head>
-    <title>Vacation Days</title>
+    <title>СколькоОтпуска</title>
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -35,7 +35,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Vacation Days</a>
+            <a class="navbar-brand" href="#">СколькоОтпуска</a>
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
@@ -51,33 +51,39 @@
     <div class="starter-template">
         <h1>Посчитай свой отпуск</h1>
 
-        <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a
-            mostly barebones HTML document.</p>
+        <p class="lead">Здесь можно быстро посчитать, сколько дней отпуска у вас осталось, если три месяца назад Леночка
+            из отдела кадров говорила, что осталась неделя.</p>
     </div>
 
-    <section id="debug">
-        <c:if test="${haveData}">
-            Have data!
-        </c:if>
-        <c:if test="${not haveData}">
-            No data
-        </c:if>
+    <section id="initial">
+        <div class="panel panel-info">
+            <div>
+                Для того, чтобы посчитать отпуск, нам надо с чего-то начать. Если вы помните все свои отпуска с момента
+                приёма на работу, введите ниже дату приёма на работу и ноль. Если нет, узнайте в отделе кадров, сколько
+                дней остаётся сейчас и введите дату, когда узнавали и это число. А мы посчитаем остальное.
+            </div>
+
+            <form class="form-inline" onsubmit="return VDays.submitInitial()">
+                <div class="form-group">
+                    <label for="initialDate">Дата, про которую известно:</label>
+                    <input type="text" id="initialDate" class="form-control datepicker"/>
+                </div>
+                <div class="form-group">
+                    <label for="initialNum">Сколько дней тогда оставалось:</label>
+                    <input type="number" id="initialNum" class="form-control" min="0" value="0"/>
+                </div>
+                <button type="submit" class="btn btn-primary">Запомнить</button>
+            </form>
+        </div>
     </section>
 
-    <section id="initial">
-        <div>Введи дату, на которую точно известно количество дней отпуска и это количество.</div>
-
-        <form class="form-inline" onsubmit="return VDays.submitInitial()">
-            <div class="form-group">
-                <label for="initialDate">Дата:</label>
-                <input type="text" id="initialDate" class="form-control datepicker"/>
-            </div>
-            <div class="form-group">
-                <label for="initialNum">Количество:</label>
-                <input type="number" id="initialNum" class="form-control" min="0" value="0"/>
-            </div>
-            <button type="submit" class="btn btn-primary">Запомнить</button>
-        </form>
+    <section id="editInitial" style="display: none">
+        <div class="panel panel-info">
+            <p class="panel-heading">
+                <span></span>
+                <button class="btn btn-default" onclick="VDays.changeInitial()">Изменить</button>
+            </p>
+        </div>
     </section>
 
     <section id="vacations" style="display: none">
