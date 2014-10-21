@@ -2,6 +2,8 @@ package alexzam.vacation;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.joda.JodaModule;
+import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -39,6 +41,11 @@ public class Application extends WebMvcConfigurerAdapter {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.registerModule(new JodaModule());
         return objectMapper;
+    }
+
+    @Bean
+    public DatastoreService datastoreService() {
+        return DatastoreServiceFactory.getDatastoreService();
     }
 
     @Override

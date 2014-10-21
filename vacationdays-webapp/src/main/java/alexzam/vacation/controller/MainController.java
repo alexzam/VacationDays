@@ -4,8 +4,10 @@ import alexzam.vacation.dto.DateState;
 import alexzam.vacation.dto.FullInfo;
 import alexzam.vacation.model.User;
 import alexzam.vacation.model.Vacation;
+import alexzam.vacation.service.StorageService;
 import alexzam.vacation.service.VacDaysService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -19,11 +21,22 @@ public class MainController {
     @Autowired
     User user;
 
+    @Qualifier("storageService")
+    @Autowired
+    private StorageService storageService;
+
     @RequestMapping("/")
     public ModelAndView main() {
         ModelAndView modelAndView = new ModelAndView("main");
         modelAndView.addObject("haveData", user.getLastKnownDate() != null);
         return modelAndView;
+    }
+
+    @RequestMapping("/testPut")
+    @ResponseBody
+    public String put() {
+        storageService.saveUser(user);
+        return "OKKK";
     }
 
     @RequestMapping(value = "/json/setInitial", method = RequestMethod.POST, consumes = "application/json",
