@@ -55,8 +55,8 @@
             из отдела кадров говорила, что осталась неделя.</p>
     </div>
 
-    <section id="initial">
-        <div class="panel panel-info">
+    <section id="editInitial">
+    <div class="panel panel-info">
             <div>
                 Для того, чтобы посчитать отпуск, нам надо с чего-то начать. Если вы помните все свои отпуска с момента
                 приёма на работу, введите ниже дату приёма на работу и ноль. Если нет, узнайте в отделе кадров, сколько
@@ -77,12 +77,12 @@
         </div>
     </section>
 
-    <section id="editInitial" style="display: none">
-        <div class="panel panel-info">
-            <p class="panel-heading">
-                <span></span>
-                <button class="btn btn-default" onclick="VDays.changeInitial()">Изменить</button>
-            </p>
+    <section id="initial" style="display: none">
+        <div class="alert alert-info" role="alert">
+            <span id="initMessage"></span>
+            <button class="btn btn-default btn-sm" onclick="VDays.changeInitial()">
+                <span class="glyphicon glyphicon-pencil"></span>
+            </button>
         </div>
     </section>
 

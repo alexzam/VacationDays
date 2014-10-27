@@ -16,8 +16,8 @@ var VDays = {
             success: function (data) {
                 me._processUserData(data);
 
-                $('#initial').slideUp();
-                $('#status').add('#vacations').slideDown();
+                $('#editInitial').slideUp();
+                $('#status, #vacations, #initial').slideDown();
             }
         });
 
@@ -106,6 +106,11 @@ var VDays = {
 
         var vacList = $('#vacations').find('.list-group');
         vacList.children().remove();
+
+        var initial = "На " + me._arrToDate(data['lastKnownDate']).toLocaleDateString() + " оставалось " +
+            me._numToDaysStr(data['lastKnownValue']);
+
+        $('#initMessage').text(initial);
 
         $.each(data['vacations'], function (i, v) {
             var start = me._arrToDate(v.start);
