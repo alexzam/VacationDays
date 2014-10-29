@@ -4,13 +4,17 @@ import alexzam.vacation.dto.DateState;
 import alexzam.vacation.dto.FullInfo;
 import alexzam.vacation.model.User;
 import alexzam.vacation.model.Vacation;
+import alexzam.vacation.service.GoogleAuthService;
 import alexzam.vacation.service.StorageService;
 import alexzam.vacation.service.VacDaysService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpSession;
 
 @Controller
 public class MainController {
@@ -25,10 +29,26 @@ public class MainController {
     @Autowired
     private StorageService storageService;
 
+    @Qualifier("googleAuthService")
+    @Autowired
+    private GoogleAuthService googleAuthService;
+
+    @Value("${auth.google.client_id}")
+    private String googleAuthClientId;
+
+
+
     @RequestMapping("/")
-    public ModelAndView main() {
+    public ModelAndView main(HttpSession session) {
         ModelAndView modelAndView = new ModelAndView("main");
         modelAndView.addObject("haveData", user.getLastKnownDate() != null);
+
+        String randomToken = googleAuthService.generateRandomToken();
+        modelAndView.addObject("token", randomToken);
+        session.setAttribute("token", randomToken);
+
+        modelAndView.addObject("googleAuthClientId", googleAuthClientId);
+
         return modelAndView;
     }
 

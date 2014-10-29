@@ -23,6 +23,19 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+    <script>
+        var token = "${token}";
+
+        (function () {
+            var po = document.createElement('script');
+            po.type = 'text/javascript';
+            po.async = true;
+            po.src = 'https://plus.google.com/js/client:plusone.js?onload=start';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(po, s);
+        })();
+    </script>
 </head>
 <body>
 
@@ -55,9 +68,23 @@
             из отдела кадров говорила, что осталась неделя.</p>
     </div>
 
+    <section id="auth">
+        <div id="signinButton">
+          <span class="g-signin"
+                data-scope="https://www.googleapis.com/auth/plus.login"
+                data-clientid="${googleAuthClientId}"
+                data-redirecturi="postmessage"
+                data-accesstype="offline"
+                data-cookiepolicy="single_host_origin"
+                data-callback="signInCallback">
+          </span>
+        </div>
+        <div id="result"></div>
+    </section>
+
     <section id="editInitial">
-    <div class="panel panel-info">
-            <div>
+        <div class="panel panel-info">
+        <div>
                 Для того, чтобы посчитать отпуск, нам надо с чего-то начать. Если вы помните все свои отпуска с момента
                 приёма на работу, введите ниже дату приёма на работу и ноль. Если нет, узнайте в отделе кадров, сколько
                 дней остаётся сейчас и введите дату, когда узнавали и это число. А мы посчитаем остальное.

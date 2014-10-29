@@ -4,9 +4,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.joda.JodaModule;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.*;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+import org.springframework.core.env.Environment;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -20,7 +21,14 @@ import java.util.List;
 @Configuration
 @ComponentScan
 @EnableWebMvc
+@PropertySources({
+        @PropertySource("classpath:app.properties"),
+        @PropertySource("classpath:secured.properties")
+})
 public class Application extends WebMvcConfigurerAdapter {
+
+    @Autowired
+    private Environment env;
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
@@ -46,6 +54,14 @@ public class Application extends WebMvcConfigurerAdapter {
     @Bean
     public DatastoreService datastoreService() {
         return DatastoreServiceFactory.getDatastoreService();
+    }
+
+    @Bean
+    public PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
+        PropertySourcesPlaceholderConfigurer ret = new PropertySourcesPlaceholderConfigurer();
+        ret.setEnvironment(env);
+
+        return ret;
     }
 
     @Override
