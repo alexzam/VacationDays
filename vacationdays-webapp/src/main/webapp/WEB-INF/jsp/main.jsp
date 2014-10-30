@@ -24,6 +24,7 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script>
         var token = "${token}";
 
@@ -35,6 +36,10 @@
             var s = document.getElementsByTagName('script')[0];
             s.parentNode.insertBefore(po, s);
         })();
+
+        function googleAuthCallback(auth) {
+            VDays.googleAuth(auth);
+        }
     </script>
 </head>
 <body>
@@ -73,13 +78,13 @@
           <span class="g-signin"
                 data-scope="https://www.googleapis.com/auth/plus.login"
                 data-clientid="${googleAuthClientId}"
-                data-redirecturi="postmessage"
-                data-accesstype="offline"
+                data-accesstype="online"
                 data-cookiepolicy="single_host_origin"
-                data-callback="signInCallback">
+                data-callback="googleAuthCallback">
           </span>
         </div>
         <div id="result"></div>
+        <a href="" id="testLink">Test</a>
     </section>
 
     <section id="editInitial">
@@ -173,7 +178,6 @@
     </div>
 
 </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script src="js/jquery-ui.min.js"></script>
 <script src="js/datepicker-ru.js"></script>
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>

@@ -94,6 +94,13 @@ var VDays = {
         });
     },
 
+    googleAuth: function (auth) {
+        var at = auth['access_token'];
+        var it = auth['id_token'];
+
+//        $.post();  // TODO Continue here 8)
+    },
+
     _closeEdit: function (el) {
         el.prev().show();
         el.remove();

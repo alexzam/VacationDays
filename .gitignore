@@ -1,3 +1,4 @@
 /.idea
 *.iml
 target
+/vacationdays-webapp/src/main/resources/secured.properties

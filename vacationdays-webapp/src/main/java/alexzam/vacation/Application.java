@@ -2,6 +2,9 @@ package alexzam.vacation;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.joda.JodaModule;
+import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
+import com.google.api.client.http.javanet.NetHttpTransport;
+import com.google.api.client.json.jackson.JacksonFactory;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +25,7 @@ import java.util.List;
 @ComponentScan
 @EnableWebMvc
 @PropertySources({
-        @PropertySource("classpath:app.properties"),
+        @PropertySource(value = "classpath:app.properties", name = "aaa"),
         @PropertySource("classpath:secured.properties")
 })
 public class Application extends WebMvcConfigurerAdapter {
@@ -62,6 +65,12 @@ public class Application extends WebMvcConfigurerAdapter {
         ret.setEnvironment(env);
 
         return ret;
+    }
+
+    @Bean
+    public GoogleIdTokenVerifier googleIdTokenVerifier() {
+        return new GoogleIdTokenVerifier.Builder(new NetHttpTransport(), new JacksonFactory())
+                .build();
     }
 
     @Override

@@ -37,7 +37,6 @@ public class MainController {
     private String googleAuthClientId;
 
 
-
     @RequestMapping("/")
     public ModelAndView main(HttpSession session) {
         ModelAndView modelAndView = new ModelAndView("main");
