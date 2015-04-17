@@ -98,7 +98,11 @@ var VDays = {
         var at = auth['access_token'];
         var it = auth['id_token'];
 
-//        $.post();  // TODO Continue here 8)
+        $.post("/gauth/received",
+            {
+                token: token,
+                idtoken: it
+            });
     },
 
     _closeEdit: function (el) {
@@ -183,7 +187,7 @@ $(function () {
     $vacations.on('click', '.formEditVac .btnCancel', VDays.onCancelEdit);
     $vacations.on('click', '.formEditVac .btnDelete', VDays.onDeleteVacation);
 
-    $.datepicker.setDefaults($.datepicker.regional[ "ru" ]);
+    $.datepicker.setDefaults($.datepicker.regional["ru"]);
 
     $('section .datepicker')
         .datepicker();

@@ -19,6 +19,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
+import javax.annotation.PostConstruct;
 import java.util.List;
 
 @Configuration
@@ -61,16 +62,18 @@ public class Application extends WebMvcConfigurerAdapter {
 
     @Bean
     public PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
-        PropertySourcesPlaceholderConfigurer ret = new PropertySourcesPlaceholderConfigurer();
-        ret.setEnvironment(env);
-
-        return ret;
+        return new PropertySourcesPlaceholderConfigurer();
     }
 
     @Bean
     public GoogleIdTokenVerifier googleIdTokenVerifier() {
         return new GoogleIdTokenVerifier.Builder(new NetHttpTransport(), new JacksonFactory())
                 .build();
+    }
+
+    @PostConstruct
+    public void postSetup() {
+        propertySourcesPlaceholderConfigurer().setEnvironment(env);
     }
 
     @Override

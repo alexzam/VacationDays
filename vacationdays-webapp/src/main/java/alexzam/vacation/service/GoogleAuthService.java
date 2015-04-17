@@ -2,8 +2,8 @@ package alexzam.vacation.service;
 
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
-import com.google.api.client.util.Value;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -19,7 +19,7 @@ public class GoogleAuthService {
     @Autowired
     private GoogleIdTokenVerifier idTokenVerifier;
 
-    @Value("${environment.getProperty('auth.google.client_id')}")
+    @Value("${auth.google.client_id}")
     private String clientId;
 
     @SuppressWarnings("FieldCanBeLocal")
