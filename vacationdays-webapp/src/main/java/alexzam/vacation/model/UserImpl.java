@@ -17,6 +17,7 @@ public class UserImpl implements User {
     private int currentNum;
 
     private List<Vacation> vacations = new ArrayList<>();
+    private String googleId;
 
     public FullInfo generateDto() {
         FullInfo info = new FullInfo();
@@ -31,6 +32,15 @@ public class UserImpl implements User {
 
     public void setCurrentNum(int currentNum) {
         this.currentNum = currentNum;
+    }
+
+    @Override
+    public void setGoogleId(String id) {
+        googleId = id;
+    }
+
+    public String getGoogleId() {
+        return googleId;
     }
 
     public LocalDate getLastKnownDate() {

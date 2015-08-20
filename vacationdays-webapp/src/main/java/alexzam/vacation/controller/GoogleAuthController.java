@@ -1,5 +1,6 @@
 package alexzam.vacation.controller;
 
+import alexzam.vacation.model.User;
 import alexzam.vacation.service.GoogleAuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -19,6 +20,9 @@ public class GoogleAuthController {
     @Autowired
     private GoogleAuthService authService;
 
+    @Autowired
+    User user;
+
     @RequestMapping("received")
     public String authReceived(HttpSession session,
                                @RequestParam("idtoken") String idToken,
@@ -28,6 +32,9 @@ public class GoogleAuthController {
         if (token == null || !token.equals(session.getAttribute("token")))
             throw new GeneralSecurityException("Wrong own token");
 
-        return authService.getIdFromToken(idToken);
+        String id = authService.getIdFromToken(idToken);
+        user.setGoogleId(id);
+
+        return id;
     }
 }
