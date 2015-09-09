@@ -98,11 +98,18 @@ var VDays = {
         var at = auth['access_token'];
         var it = auth['id_token'];
 
-        $.post("/gauth/received",
-            {
+        $.ajax({
+            url: "/gauth/received",
+            data: {
                 token: token,
                 idtoken: it
-            });
+            },
+            type: 'POST',
+            dataType: 'json',
+            success: function (data) {
+                VDays._processUserData(data);
+            }
+        });
     },
 
     _closeEdit: function (el) {

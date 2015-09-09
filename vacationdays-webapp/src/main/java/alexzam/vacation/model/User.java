@@ -1,6 +1,7 @@
 package alexzam.vacation.model;
 
 import alexzam.vacation.dto.FullInfo;
+import com.google.appengine.api.datastore.Entity;
 import org.joda.time.LocalDate;
 
 import java.io.Serializable;
@@ -25,4 +26,8 @@ public interface User extends Serializable {
     void setCurrentNum(int i);
 
     void setGoogleId(String id);
+
+    Entity toEntity();
+
+    void copyFrom(User storedUser);
 }
